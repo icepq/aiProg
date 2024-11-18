@@ -20,11 +20,3 @@ class Message:
                 continue
             with st.chat_message(message["role"]):
                 st.markdown(message["content"])
-
-    def display_stream(self, generater):
-        # 結果を一度に表示するためのリストを作成
-        result = ""
-        for chunk in generater:
-            result += chunk
-        st.write(result)
-        return result  # 戻り値を追加
