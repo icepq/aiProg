@@ -1,7 +1,6 @@
 import streamlit as st
 from groq_client import GroqAPI
 from message import Message
-from components import ModelSelector
 from settings import INGREDIENTS
 
 def main():
@@ -23,14 +22,11 @@ def main():
             # 検索ボタンを横に配置
             search_button = st.button("レシピを検索")
 
-    model = ModelSelector()
-    selected_model = model.select()
-
     message = Message()
 
     # 検索ボタンが押された場合にレシピを生成
     if search_button and selected_ingredients:
-        llm = GroqAPI(selected_model)
+        llm = GroqAPI()
         selected_ingredients_str = ", ".join(selected_ingredients)
 
         # ユーザーの選択をメッセージに追加
