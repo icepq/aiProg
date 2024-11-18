@@ -2,13 +2,14 @@ import os
 from pathlib import Path
 from groq import Groq
 from dotenv import load_dotenv
+from settings import MODEL_NAME
 
 load_dotenv(Path(__file__).parent / ".env")
 
 class GroqAPI:
-    def __init__(self, model_name: str):
+    def __init__(self):
         self.client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-        self.model_name = model_name
+        self.model_name = MODEL_NAME
 
     def _response(self, message):
         return self.client.chat.completions.create(
