@@ -11,7 +11,7 @@ def main():
 
     # サイドバーに食材の選択肢とボタンを横並びに配置
     with st.sidebar:
-        st.sidebar.title("食材を選んでください")
+
         
         # 横並びにするためのカラムを作成
         col1, col2 = st.columns([2, 1])
@@ -21,7 +21,7 @@ def main():
 
         with col2:
             # 検索ボタンを横に配置
-            search_button = st.button("レシピを検索")
+            search_button = st.button(" 食材の決定")
 
     model = ModelSelector()
     selected_model = model.select()
