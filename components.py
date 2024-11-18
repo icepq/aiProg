@@ -7,5 +7,4 @@ class ModelSelector:
 
     def select(self):
         with st.sidebar:
-            st.sidebar.title("groq chat")
-            return st.selectbox("", self.models)
+            return st.selectbox("モデルを選択してください:", self.models)
