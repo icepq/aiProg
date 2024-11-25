@@ -3,6 +3,13 @@ from groq_client import GroqAPI
 from message import Message
 from settings import INGREDIENTS
 
+# CSS
+def load_css():
+    with open("style.css", "r", encoding="utf-8") as f:
+        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+load_css()
+
+
 def main():
     # 初期化
     if "search_history" not in st.session_state:
@@ -11,16 +18,20 @@ def main():
     # サイドバーに食材の選択肢とボタンを横並びに配置
     with st.sidebar:
         st.sidebar.title("食材を選んでください")
-        
-        # 横並びにするためのカラムを作成
-        col1, col2 = st.columns([2, 1])
-        
-        with col1:
-            selected_ingredients = st.multiselect("食材を選んでください", INGREDIENTS)
 
-        with col2:
-            # 検索ボタンを横に配置
-            search_button = st.button("レシピを検索")
+        # 食材を複数列で表示
+        num_columns = 2
+        columns = st.columns(num_columns)
+        selected_ingredients = []
+
+        for i, ingredient in enumerate(INGREDIENTS):
+            col = columns[i % num_columns]
+            # CSS
+            if col.checkbox(ingredient, key=ingredient):
+                selected_ingredients.append(ingredient)
+
+        # 検索ボタン
+        search_button = st.button("レシピを検索")
 
     message = Message()
 
