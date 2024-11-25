@@ -1,0 +1,9 @@
+/* チェックボックスのラベルを小さく */
+.small-checkbox label {
+    font-size: 12px;
+}
+
+/* チェックボックス自体を小さく */
+.small-checkbox input {
+    transform: scale(0.8);
+}
