@@ -64,15 +64,15 @@ def main():
     # 最新の結果のみを表示
     if st.session_state.search_history:
         latest_history = st.session_state.search_history[0]
-        st.write(f"### 選択された食材: {latest_history['ingredients']}")
-        st.write(f"#### レシピ:\n{latest_history['recipe']}")
+        st.write(f"##### 選択された食材: {latest_history['ingredients']}")
+        st.write(f"{latest_history['recipe']}")
  
     # サイドバーに検索履歴を表示（最新以外）
     st.sidebar.write("検索履歴:")
     for idx, history in enumerate(st.session_state.search_history[1:]):  # 最新は除外
         if st.sidebar.button(history["ingredients"], key=f"history_{idx}"):
-            st.write(f"### 選択された食材: {history['ingredients']}")
-            st.write(f"#### レシピ:\n{history['recipe']}")
+            st.write(f"##### 選択された食材: {history['ingredients']}")
+            st.write(f"{history['recipe']}")
  
 if __name__ == "__main__":
     main() 
