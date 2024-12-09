@@ -88,6 +88,12 @@ def main():
                 st.session_state.favorites.append(latest_history)
                 st.success("お気に入りに追加しました！")
 
+   # サイドバーにお気に入りを表示
+    with st.sidebar:
+        st.write("お気に入り:")
+        for idx, favorite in enumerate(st.session_state.favorites):
+            if st.button(favorite["ingredients"], key=f"favorite_{idx}"):
+                st.session_state.selected_recipe = favorite
 
     # サイドバーに検索履歴を表示（最新以外）
     st.sidebar.write("検索履歴:")
@@ -96,12 +102,6 @@ def main():
             st.write(f"##### 選択された食材: {history['ingredients']}")
             st.write(f"{history['recipe']}")
 
-   # サイドバーにお気に入りを表示
-    with st.sidebar:
-        st.write("お気に入り:")
-        for idx, favorite in enumerate(st.session_state.favorites):
-            if st.button(favorite["ingredients"], key=f"favorite_{idx}"):
-                st.session_state.selected_recipe = favorite
 
     # メイン画面に選択されたレシピを表示
     if st.session_state.selected_recipe is not None:
