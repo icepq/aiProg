@@ -12,6 +12,11 @@ def main():
     # 初期化
     if "search_history" not in st.session_state:
         st.session_state.search_history = []
+    if "favorites" not in st.session_state:
+        st.session_state.favorites = []
+    if "selected_recipe" not in st.session_state:
+        st.session_state.selected_recipe = None
+
 
     # サイドバーに食材の選択肢とボタンを横並びに配置
     with st.sidebar:
@@ -77,12 +82,32 @@ def main():
         st.write(f"##### 選択された食材: {latest_history['ingredients']}")
         st.write(f"{latest_history['recipe']}")
 
+        # お気に入りボタンをサイドバーに配置
+        with st.sidebar:
+            if st.button("お気に入りに追加", key="favorite_button"):
+                st.session_state.favorites.append(latest_history)
+                st.success("お気に入りに追加しました！")
+
+
     # サイドバーに検索履歴を表示（最新以外）
     st.sidebar.write("検索履歴:")
     for idx, history in enumerate(st.session_state.search_history[1:]):  # 最新は除外
         if st.sidebar.button(history["ingredients"], key=f"history_{idx}"):
             st.write(f"##### 選択された食材: {history['ingredients']}")
             st.write(f"{history['recipe']}")
+
+   # サイドバーにお気に入りを表示
+    with st.sidebar:
+        st.write("お気に入り:")
+        for idx, favorite in enumerate(st.session_state.favorites):
+            if st.button(favorite["ingredients"], key=f"favorite_{idx}"):
+                st.session_state.selected_recipe = favorite
+
+    # メイン画面に選択されたレシピを表示
+    if st.session_state.selected_recipe is not None:
+        selected_recipe = st.session_state.selected_recipe
+        st.write(f"##### 選択された食材: {selected_recipe['ingredients']}")
+        st.write(f"{selected_recipe['recipe']}")
 
 if __name__ == "__main__":
     main()
