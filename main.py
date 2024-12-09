@@ -1,7 +1,7 @@
 import streamlit as st
 from groq_client import GroqAPI
 from message import Message
-from settings import VEGETABLES, MEATS, OTHERS, SYSTEM_PROMPT  # SYSTEM_PROMPT をインポート
+from settings import VEGETABLES, MEATS, OTHERS, FISH, SYSTEM_PROMPT  # SYSTEM_PROMPT をインポート
 
 def load_css():
     with open("style.css", "r", encoding="utf-8") as f:
@@ -27,6 +27,11 @@ def main():
 
         with st.sidebar.expander("肉類"):
             for ingredient in MEATS:
+                if st.checkbox(ingredient, key=ingredient):
+                    selected_ingredients.append(ingredient)
+
+        with st.sidebar.expander("魚類"):
+            for ingredient in FISH:
                 if st.checkbox(ingredient, key=ingredient):
                     selected_ingredients.append(ingredient)
 
