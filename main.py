@@ -48,6 +48,19 @@ def main():
         # 検索ボタン
         search_button = st.button("レシピを検索")
 
+        # リセットボタン（チェックボックスの選択解除）
+        reset_button = st.button("選択を解除", key="reset_button")
+
+        if reset_button:
+    # チェックボックスの状態をリセットするため、セッションステートの特定のキーを削除
+            for ingredient in VEGETABLES + MEATS + FISH + OTHERS:
+                if ingredient in st.session_state:
+                    del st.session_state[ingredient]
+            st.session_state.selected_recipe = None
+            st.rerun()
+
+    #ここがうまくいってない
+
     message = Message()
 
     # レシピ検索処理
